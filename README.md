@@ -8,6 +8,8 @@ Tim: nguyeti4@oregonstate.edu
 
 C. Greyston Brady bradychr@oregonstate.edu
 
+Kyle Werstlein werstlky@oregonstate.edu
+
 ## Description
 
 Simple browser based spaceship game with highscore and acompanying website essentials. Stretch goals include features like public leaderboards, more complicated gameplay and mobile compatibility.
