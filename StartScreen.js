@@ -14,6 +14,8 @@ class StartScreenScene extends Phaser.Scene {
         this.text  = this.add.text(50,50, "hello", {font: '16px Courier', fill: '#ffffff'});
         //this.scene.start("SceneMain");
         this.continue_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+
+
     }
     update(){
         if(this.continue_key.isDown)
