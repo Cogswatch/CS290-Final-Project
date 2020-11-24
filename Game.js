@@ -17,6 +17,7 @@ let coins = [];
 // 1: player bullets
 // 2: enemies
 // 3: enemy bullets
+// 4: enviroment
 let collision_groups = [];
 let collision_cats = [];
 
@@ -34,6 +35,7 @@ class GameScene extends Phaser.Scene {
         this.load.spritesheet('thrust', 'assets/thrust_01.png', { frameWidth: 32, frameHeight: 16 });
         this.load.spritesheet('bullet', 'assets/bullet_01.png', { frameWidth: 32, frameHeight: 16 });
         this.load.image('coin', 'assets/coin_1.png');
+        this.load.image('asteroid', 'assets/asteroid_001.png');
         this.load.image('sm_smoke', 'assets/particles/smoke_small_01.png');
 
         for(var i = 0; i < 10; i++)
@@ -92,6 +94,17 @@ class GameScene extends Phaser.Scene {
         player.fire_rate = 3;
 
         emitter.startFollow(player);
+
+
+        for(var i = 0; i < 10; i++)
+        {
+            var x = Phaser.Math.Between(0,800);
+            var y = Phaser.Math.Between(0,600);
+            var asteroid = this.matter.add.sprite(x,y, "asteroid");
+            asteroid.setMass(300);
+            asteroid.setAngle(Phaser.Math.Between(0,1000));
+            asteroid.setCollisionGroup(collision_groups[4]).setCollisionCategory(collision_cats[4]);
+        }
     }
 
     update()
@@ -139,7 +152,7 @@ function fire_bullet(game_object)
     var bullet = this.matter.add.sprite(game_object.x, game_object.y,"bullet");
     bullet.setAngle(game_object.angle);
     bullet.setCollisionGroup(collision_groups[1]);
-    bullet.setCollisionCategory(collision_cats[1]).setCollidesWith(collision_cats[2]);
+    bullet.setCollisionCategory(collision_cats[1]).setCollidesWith(collision_cats[2]).setCollidesWith(collision_cats[4]);
     var theta = game_object.angle * 3.14159/180.0;
     const bullet_speed = 18.0;
     var vx = Math.cos(theta) * bullet_speed;
