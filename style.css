@@ -1,0 +1,12 @@
+
+
+.game-window {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-window div{
+    width: 100%;
+    height: 100%;
+}
