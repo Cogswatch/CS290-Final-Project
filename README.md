@@ -4,7 +4,7 @@
 
 Zackery Mason-Blaug, masonblz@oregonstate.edu
 
-Tim: nguyeti4@oregonstate.edu
+Timothy Nguyen: nguyeti4@oregonstate.edu
 
 C. Greyston Brady bradychr@oregonstate.edu
 
