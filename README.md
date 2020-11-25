@@ -8,7 +8,7 @@ Timothy Nguyen: nguyeti4@oregonstate.edu
 
 C. Greyston Brady bradychr@oregonstate.edu
 
-Kyle Werstlein werstlky@oregonstate.edu
+Cameron VandenBerg vandenca@oregonstate.edu
 
 ## Description
 
@@ -20,7 +20,7 @@ Simple browser based spaceship game with highscore and acompanying website essen
 
 ---
 
-![](/Users/greystonbrady/Downloads/CS290/CS290 - page 1.png)
+![Hand Drawn Mock](https://raw.githubusercontent.com/Cogswatch/CS290-Final-Project/main/assets/CS290%20-%20page%201.png)
 
 ##Outline
 
