@@ -13,6 +13,7 @@ var config = {
         }
     },
     scene: [title, game_scene],
+    parent: 'game-window',
     dom: { createContainer: false}
 };
 
@@ -22,7 +23,6 @@ var game = new Phaser.Game(config);
 
 
 ///////////////////////////////////////////////////////////////////////////
-
 
 
 ///////////////////////////////////////////////////////////////////////////
