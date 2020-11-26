@@ -4,9 +4,11 @@
 
 Zackery Mason-Blaug, masonblz@oregonstate.edu
 
-Tim: nguyeti4@oregonstate.edu
+Timothy Nguyen: nguyeti4@oregonstate.edu
 
 C. Greyston Brady bradychr@oregonstate.edu
+
+Cameron VandenBerg vandenca@oregonstate.edu
 
 ## Description
 
@@ -18,23 +20,23 @@ Simple browser based spaceship game with highscore and acompanying website essen
 
 ---
 
-![](/Users/greystonbrady/Downloads/CS290/CS290 - page 1.png)
+![Hand Drawn Mock](https://raw.githubusercontent.com/Cogswatch/CS290-Final-Project/main/assets/CS290%20-%20page%201.png)
 
-##Outline
+## Outline
 
 * Web Game /w Phasor.io
 
 * Spaceship game, Asteroids/Invader style
   * Stretch Goals
-    * 360 movement
-    * More complicated objectives
-      * Bosses?
-    * Power ups
-    * Physics Engine Upgrade
-      * Box2D?
-    * User Suggestions/Bug Reporting via HTML Form -> Github Issues
-    * Previous Game Stat Breakdown
-    * Cross Platform, Mobile vs. Desktop
+   * 360 movement
+   * More complicated objectives
+    * Bosses?
+   * Power ups
+   * Physics Engine Upgrade
+    * Box2D?
+   * User Suggestions/Bug Reporting via HTML Form -> Github Issues
+   * Previous Game Stat Breakdown
+   * Cross Platform, Mobile vs. Desktop
 * Leaderboards, potentially public
   * Filter profanity + XSS
   * Local vs Online D.B.
