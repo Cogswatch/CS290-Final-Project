@@ -1,31 +1,64 @@
+/* CSS - Cascading Style Sheet */
+/* Palette color codes */
+/* Palette URL: http://paletton.com/#uid=15s0u0kixd06ekEaZfPqdaBK+7b */
 
+/* Feel free to copy&paste color codes to your application */
+
+
+/* As hex codes */
+
+.color-primary-0 { color:  #5F2836}	/* Main Primary color */
+.color-primary-1 { color:  #967980}
+.color-primary-2 { color:  #734C55}
+.color-primary-3 { color:  #4D0E1E}
+.color-primary-4 { color:  #34000D}
+
+
+.bcolor-primary-0 { background-color: #5F2836}	/* Main Primary color */
+.bcolor-primary-1 { background-color: #967980}
+.bcolor-primary-2 { background-color: #734C55}
+.bcolor-primary-3 { background-color: #4D0E1E}
+.bcolor-primary-4 { background-color: #34000D}
+
+body {
+  height: 100%;
+  margin: 0; 
+/*   background-color: #210026 */
+}
+
+.page-header{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
 
 .game-window-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: purple;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .game-window-container div{
-    width: 50%;
-    height: 50%;
-    padding: 10px;
+  width: 50%;
+  height: 50%;
+  padding: 10px;
 }
 
 #modal-backdrop {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.85);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.85);
 }
 
 #score-modal {
-    position: fixed;
-    top: 0;
+  position: fixed;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
@@ -93,20 +126,33 @@
     display: none;
 }
 
+#page-title {
+  display: flex;
+  justify-content: center;
+}
 
+#title-header{
+  border-radius: 8px;
+}
 
 .leaderboard-container {
   display: flex;
   justify-content: center;
-  background-color: purple;
-
+}
+.leaderboard-header {
+  display: flex;
+  justify-content: center;
+}
+.leaderboard{
+  width: 80%;
 }
 
 .leaderboard-entry {
   display: flex;
   justify-content: space-between;
-  background-color: lightblue;
+  border-radius: 8px;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 

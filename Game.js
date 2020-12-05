@@ -18,7 +18,8 @@ let enemies = [];
 let enemy_bullets = new ObjectPool();
 let player_bullets = new ObjectPool();
 
-let enemy_spawn_count = 5;
+let last_enemy_spawn_count = 5;
+let enemy_spawn_count = 8;
 
 // 0: player
 // 1: player bullets
@@ -196,10 +197,13 @@ class GameScene extends Phaser.Scene {
     update()
     {
         score_text.setText("Score: " + score + '\nHealth: ' + player.health);
-
+        if(enemies.length == 0)
+        {
+            return this.new_wave();
+        }
         if(player.health <= 0)
         {
-            this.death();
+            return this.death();
         }
 
         if(mouse_controll)
@@ -285,6 +289,28 @@ class GameScene extends Phaser.Scene {
         score += 1;
     }
 
+    new_wave()
+    {
+        this.reset();
+        let t = enemy_spawn_count + last_enemy_spawn_count;
+        last_enemy_spawn_count = enemy_spawn_count;
+        enemy_spawn_count = t;
+        this.scene.start("GameScene")
+    }
+
+    reset()
+    {
+        coins = [];
+        explosions = [];
+        enemies = [];
+        
+        enemy_bullets = new ObjectPool();
+        player_bullets = new ObjectPool();
+        
+        collision_groups = [];
+        collision_cats = [];
+        event_emitter = null;
+    }
     
     death()
     {
@@ -294,19 +320,10 @@ class GameScene extends Phaser.Scene {
         modalbd.classList.remove('hidden');
         game.score = score;
         score = 0;
-        
-
-        coins = [];
-        explosions = [];
-        enemies = [];
-        
-        enemy_bullets = new ObjectPool();
-        player_bullets = new ObjectPool();
         enemy_spawn_count = 5;
         
-        collision_groups = [];
-        collision_cats = [];
-        event_emitter = null;
+
+        this.reset();
 
         this.scene.start("StartScreenScene");
     }

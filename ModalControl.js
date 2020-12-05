@@ -32,6 +32,7 @@ window.onload = function () {
         else
         {
             send_score(name_input.value, game.score);
+            location.reload();
         }
     });
 };
