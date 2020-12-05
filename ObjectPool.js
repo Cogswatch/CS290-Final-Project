@@ -11,7 +11,7 @@ class ObjectPool{
     }
 
     remove(obj){
-        this.pool.filter(item => obj !== item);
+        this.pool = this.pool.filter(item => obj !== item);
     }
 
     update(functor){
