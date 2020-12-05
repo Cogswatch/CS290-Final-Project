@@ -15,9 +15,10 @@ let coins = [];
 let explosions = [];
 let enemies = [];
 
-let bullets = new ObjectPool();
+let enemy_bullets = new ObjectPool();
+let player_bullets = new ObjectPool();
 
-let enemy_spawn_count = 15;
+let enemy_spawn_count = 5;
 
 // 0: player
 // 1: player bullets
@@ -28,6 +29,10 @@ let collision_groups = [];
 let collision_cats = [];
 
 let event_emitter = null;
+
+let mouse_controll = false;
+
+let mouse_state = {left: false, right: false};
 
 ///////////////////////////////////////////////////////////////////////////
 class GameScene extends Phaser.Scene {
@@ -56,6 +61,35 @@ class GameScene extends Phaser.Scene {
     
     create ()
     {
+        this.input.mouse.disableContextMenu();
+
+        this.input.on('pointerdown', function (pointer) {
+
+            if (pointer.rightButtonDown())
+            {
+                mouse_state.right = true;
+            }
+            if(pointer.leftButtonDown())
+            {
+                mouse_state.left = true;
+            }
+    
+        }, this);
+
+
+        this.input.on('pointerup', function (pointer) {
+
+            if (!pointer.rightButtonDown())
+            {
+                mouse_state.right = false;
+            }
+            if(!pointer.leftButtonDown())
+            {
+                mouse_state.left = false;
+            }
+    
+        }, this);
+
         this.anims.create({
             key: 'bullet_anim',
             frames: this.anims.generateFrameNames('bullet'),
@@ -121,6 +155,7 @@ class GameScene extends Phaser.Scene {
 
         player.fire_accum = 0;
         player.fire_rate = 3;
+        player.health = 10;
 
         emitter.startFollow(player);
         this.cameras.main.startFollow(player);
@@ -147,7 +182,7 @@ class GameScene extends Phaser.Scene {
             ship.setFixedRotation();
             ship.setFrictionAir(0.1);
             ship.fire_accum = 0;
-            ship.fire_rate = 8;
+            ship.fire_rate = 32;
             ship.health = 10;
             enemies.push(ship);
         }
@@ -160,25 +195,38 @@ class GameScene extends Phaser.Scene {
 
     update()
     {
-        score_text.setText("Score: " + score);
+        score_text.setText("Score: " + score + '\nHealth: ' + player.health);
 
-        if (move_left.isDown)
+        if(player.health <= 0)
         {
-            player.setAngularVelocity(-0.1);
-        }
-        else if (move_right.isDown)
-        {
-            player.setAngularVelocity(0.1);
+            this.death();
         }
 
-        if(player_fire.isDown)
+        if(mouse_controll)
         {
-            event_emitter.emit('fire', player);
+            var m_pos = {x: this.input.activePointer.worldX, y: this.input.activePointer.worldY};
+            fly_toward(player, m_pos, true, mouse_state.left, mouse_state.right);
         }
-
-        if(throttle.isDown)
+        else
         {
-            player.thrust(0.1);
+            if (move_left.isDown)
+            {
+                player.setAngularVelocity(-0.1);
+            }
+            else if (move_right.isDown)
+            {
+                player.setAngularVelocity(0.1);
+            }
+
+            if(player_fire.isDown)
+            {
+                event_emitter.emit('fire', player, player_bullets);
+            }
+
+            if(throttle.isDown)
+            {
+                player.thrust(0.1);
+            }
         }
  
         player.fire_accum--;
@@ -211,12 +259,21 @@ class GameScene extends Phaser.Scene {
             }
         }
 
-        bullets.update(function (bullet){
+        enemy_bullets.update(function (bullet){
             bullet.life_time -= 1;
             if(bullet.life_time<=0)
             {
                 bullet.destroy();
-                bullets.remove(bullet);
+                enemy_bullets.remove(bullet);
+            }
+        });
+
+        player_bullets.update(function (bullet){
+            bullet.life_time -= 1;
+            if(bullet.life_time<=0)
+            {
+                bullet.destroy();
+                player_bullets.remove(bullet);
             }
         });
 
@@ -227,40 +284,92 @@ class GameScene extends Phaser.Scene {
         coin.disableBody(true, true);
         score += 1;
     }
+
+    
+    death()
+    {
+        var modal = document.getElementById("score-modal");
+        var modalbd = document.getElementById("modal-backdrop");
+        modal.classList.remove('hidden');
+        modalbd.classList.remove('hidden');
+        game.score = score;
+        score = 0;
+        
+
+        coins = [];
+        explosions = [];
+        enemies = [];
+        
+        enemy_bullets = new ObjectPool();
+        player_bullets = new ObjectPool();
+        enemy_spawn_count = 5;
+        
+        collision_groups = [];
+        collision_cats = [];
+        event_emitter = null;
+
+        this.scene.start("StartScreenScene");
+    }
+    
 }
 
-function fly_toward(ship, target)
+function fly_toward(ship, target, player = false, thrust = true, fire = true)
 {
     if(!ship || !target) return;
     var sa = ship.angle * 3.14159/180.0;
 
-    var sdy = Math.cos(sa);
-    var sdx = -Math.sin(sa);
+    
+    // SIDE VECTOR not sure which
+    var sdx = Math.cos(sa);
+    var sdy = Math.sin(sa);
+    
+    var tdx = target.x - ship.x;
+    var tdy = target.y - ship.y;
 
-    var tdx = target.x - ship.x
-    var tdy = target.y - ship.y
+    var target_angle = Math.atan2(tdy, tdx);
+    var da = Math.atan2(Math.sin(target_angle - sa), Math.cos(target_angle - sa));
 
-    var tdl = Math.sqrt(tdx * tdx + tdy * tdy)
+
+    ship.setAngularVelocity(da * 0.1);
+
+    //target delta length
+    var tdl = Math.sqrt(tdx * tdx + tdy * tdy);
     tdx /= tdl;
     tdy /= tdl;
-
+//
     var t_dot_s = tdx * sdx + tdy * sdy;
-    ship.setAngularVelocity(t_dot_s*0.1);
+//
+    //ship.setAngularVelocity(t_dot_s * 0.1);
 
-    if(tdl > 300.0) // far away
+    if(!player)
     {
-        ship.thrust(0.1);
+        if(tdl > 300.0) // far away
+        {
+            ship.thrust(0.1);
+        }
+        else // close to target
+        {
+            ship.thrust(0.1);
+            ship.setAngularVelocity(Math.sign(tdx*tdy) * (1.0-Math.abs(t_dot_s))*0.1);
+        }
+        if(tdl < 460.0 && !player && fire)
+        {
+            event_emitter.emit("fire", ship, enemy_bullets, false);
+        }
     }
-    else // close to target
+    else 
     {
-        ship.thrust(0.1);
-        ship.setAngularVelocity(Math.sign(tdx*tdy) * (1.0-Math.abs(t_dot_s))*0.1);
+        if(thrust)
+        {
+            ship.thrust(0.1);
+        }
+        if(fire)
+        {
+            event_emitter.emit("fire", ship, player_bullets);
+        }
     }
 
-    if(tdl < 460.0)
-    {
-        event_emitter.emit("fire", ship);
-    }
+    
 }
 
 function destroy_bullet(bullet, hit_object)
@@ -284,7 +393,7 @@ function destroy_bullet(bullet, hit_object)
 }
 
 // todo add collision group param
-function fire_bullet(game_object)
+function fire_bullet(game_object, pool, player = true)
 {
     game_object.fire_accum--;
     if(game_object.fire_accum > 0)
@@ -298,13 +407,21 @@ function fire_bullet(game_object)
     bullet.damage = 1;
     bullet.life_time = 40;
     bullet.setAngle(game_object.angle);
-    bullet.setCollisionGroup(collision_groups[1]);
-    bullet.setCollisionCategory(collision_cats[1]).setCollidesWith([collision_cats[2],collision_cats[4]]);
+    if(player)
+    {
+        bullet.setCollisionGroup(collision_groups[1]);
+        bullet.setCollisionCategory(collision_cats[1]).setCollidesWith([collision_cats[2],collision_cats[4]]);
+    }
+    else
+    {
+        bullet.setCollisionGroup(collision_groups[3]);
+        bullet.setCollisionCategory(collision_cats[3]).setCollidesWith([collision_cats[0],collision_cats[4]]);
+    }
     var theta = game_object.angle * 3.14159/180.0;
     const bullet_speed = 18.0;
     var vx = Math.cos(theta) * bullet_speed;
     var vy = Math.sin(theta) * bullet_speed;
     bullet.setVelocity(vx,vy);
     
-    bullets.add(bullet);
+    pool.add(bullet);
 }
