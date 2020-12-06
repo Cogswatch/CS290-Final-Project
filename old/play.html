@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Play</title>
+    
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="./lib/phaser.min.js"></script>
+
+    <script src="ObjectPool.js"></script>
+    <script src="StartScreen.js"></script>
+    <script src="Game.js"></script>
+    <script src="main.js"></script>
+    <script src="ModalControl.js"></script>
+</head>
+<body>
+    <h1>Play</h1>
+    <span><a href="scores.html">Scores</a></span> 
+    <span><a href="index.html">HomePage</a></span>
+    <span><a href="about.html">About</a></span>
+    <span><a href="">Play</a></span> 
+    <span><a href="contact.html">Contact Info</a></span> 
+
+    <div class="game-window-container">
+        <div id="game-window">
+        </div>
+    </div>
+
+    <div id="modal-backdrop" class="hidden"></div>
+    <div id="score-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Enter your name</h3>
+          <button type="button" id="modal-close" class="modal-hide-button">&times;</button>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="name-input-element">
+            <label for="name-text-input">Name</label>
+            <input type="text" id="name-text-input"></input>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="modal-cancel" class="modal-hide-button action-button">Cancel</button>
+          <button type="button" id="modal-accept" class="action-button">Save Score</button>
+        </div>
+
+      </div>
+    </div>
+
+</body>    
+</html>

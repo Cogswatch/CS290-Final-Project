@@ -40,10 +40,12 @@ body {
   justify-content: center;
 }
 
-.game-window-container div{
-  width: 50%;
-  height: 50%;
+#game-window {
   padding: 10px;
+  display: inline-flex;
+  justify-content: center;
+  border-radius: 8px;
+  margin-bottom: 64px;
 }
 
 #modal-backdrop {
@@ -155,7 +157,31 @@ body {
   margin-bottom: 10px;
 }
 
+/* ############################################################################ */
+/* ##################################Contact################################### */
 
+.contacts{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
 
+.contact-container{
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  width: 30%;
+}
 
-
+.contact-image-container{
+  padding: 10px;
+  height: 120px;
+  border-radius: 8px;
+}
+.contact-image-container img {
+  width: auto;
+  height: 100%;
+}
