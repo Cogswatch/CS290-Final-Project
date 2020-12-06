@@ -25,16 +25,9 @@ function register_get_request(name)
     });
 }
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '', 'index.html'));
-});
 
-register_get_request("index.html");
-//register_get_request("play.html");
-//register_get_request("scores.html");
-register_get_request("about.html");
-register_get_request("contact.html");
 register_get_request("style.css");
+register_get_request("godotStyle.css");
 register_get_request("Game.js");
 register_get_request("ModalControl.js");
 register_get_request("main.js");
@@ -57,7 +50,40 @@ app.get('/scores.html', function (req, res, next) {
     res.render('scores', context);
 });
 
+app.get('/about.html', function (req, res, next) {
+    var context = {
+        title: 'About',
+    };
+    res.render('about', context);
+});
+
+
+let homepage = function (req, res, next) {
+    var context = {
+        title: 'Home Page',
+    };
+    res.render('home', context);
+}
+
+app.get('/index.html', homepage);
+app.get('/', homepage);
+
+app.get('/contact.html', function (req, res, next) {
+    var context = {
+        title: 'Contact',
+        devs: require("./data/devs.json")
+    };
+    res.render('contact', context);
+});
+
 app.get('/play.html', function (req, res, next) {
+    var context = {
+        title: 'Play',
+    };
+    res.render('godotplay', context);
+});
+
+app.get('/oldplay.html', function (req, res, next) {
     var context = {
         title: 'Play',
     };
@@ -80,8 +106,8 @@ app.get('*', function (req, res) {
     res.status(404).sendFile(path.join(__dirname, '', '404.html'));
 });
 
-var file_data = require('./data/leaderboard.json');
 
+var file_data = require('./data/leaderboard.json');
 app.post('/play.html', function (req, res) {
     console.log(" === post request: ", req.body.score);
     var data =  (req.body);
