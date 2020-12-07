@@ -141,10 +141,12 @@ body {
   display: flex;
   justify-content: center;
 }
+
 .leaderboard-header {
   display: flex;
   justify-content: center;
 }
+
 .leaderboard{
   width: 80%;
 }
