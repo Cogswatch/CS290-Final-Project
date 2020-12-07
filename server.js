@@ -15,8 +15,7 @@ app.set('view engine', 'handlebars');
 
 const fs = require('fs');
 
-
-//app.use(express.static('public'));
+app.use(express.static('public'));
 
 function register_get_request(name)
 {
@@ -25,17 +24,12 @@ function register_get_request(name)
     });
 }
 
-
 register_get_request("style.css");
 register_get_request("godotStyle.css");
-register_get_request("Game.js");
-register_get_request("ModalControl.js");
-register_get_request("main.js");
-register_get_request("StartScreen.js");
-register_get_request("ObjectPool.js"); 
+register_get_request("public/devs/zack.jpeg");
 
-app.get('/scores.html', function (req, res, next) {
-    var leaderboard_data = require('./data/leaderboard.json');
+app.get('/scores', function (req, res, next) {
+    var leaderboard_data = require('./public/data/leaderboard.json');
     leaderboard_data.sort((a, b) => (a.score < b.score) ? 1 : -1)
 
     var i = 1;
@@ -50,7 +44,7 @@ app.get('/scores.html', function (req, res, next) {
     res.render('scores', context);
 });
 
-app.get('/about.html', function (req, res, next) {
+app.get('/about', function (req, res, next) {
     var context = {
         title: 'About',
     };
@@ -68,60 +62,38 @@ let homepage = function (req, res, next) {
 app.get('/index.html', homepage);
 app.get('/', homepage);
 
-app.get('/contact.html', function (req, res, next) {
+app.get('/contact', function (req, res, next) {
     var context = {
         title: 'Contact',
-        devs: require("./data/devs.json")
+        devs: require("./public/data/devs.json")
     };
     res.render('contact', context);
 });
 
-app.get('/play.html', function (req, res, next) {
+app.get('/play', function (req, res, next) {
     var context = {
         title: 'Play',
     };
     res.render('godotplay', context);
 });
 
-app.get('/oldplay.html', function (req, res, next) {
-    var context = {
-        title: 'Play',
-    };
-    res.render('play', context);
-});
-
-app.get('/lib/phaser.min.js', function (req, res) {
-    res.sendFile(path.join(__dirname, 'lib', 'phaser.min.js'));
-});
-
-app.get('/assets/:sub_dir/:game_asset', function (req, res) {
-    res.sendFile(path.join(__dirname, 'assets/' + req.params.sub_dir, req.params.game_asset));
-});
-
-app.get('/assets/:game_asset', function (req, res) {
-    res.sendFile(path.join(__dirname, 'assets', req.params.game_asset));
-});
-
 app.get('*', function (req, res) {
-    res.status(404).sendFile(path.join(__dirname, '', '404.html'));
+    var context = {
+        title: '404',
+        path: req.path
+    };
+    res.status(404).render('404', context);
 });
 
-
-var file_data = require('./data/leaderboard.json');
-app.post('/play.html', function (req, res) {
+var file_data = require('./public/data/leaderboard.json');
+app.post('/play', function (req, res) {
     console.log(" === post request: ", req.body.score);
     var data =  (req.body);
     console.log('file data: ', file_data)
     file_data.push(data);
 
-
     fs.writeFileSync('./data/leaderboard.json', JSON.stringify(file_data, null, 2));
 
-    //fs.appendFile('data/leaderboard.txt', data.name + '::' + data.score + '\n', function (err) {
-     //   if (err) throw err;
-     //   console.log('Saved!');
-    //});
-    
     res.send();
 });
 
