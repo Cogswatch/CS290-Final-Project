@@ -8,5 +8,10 @@
         "name": "evil Zack",
         "image_path": "public/devs/zack.jpeg",
         "email": "masonblz@oregonstate.edu"
+    },
+    {
+        "name": "C Greyston Brady",
+        "image_path": "public/devs/brady.jpeg",
+        "email": "bradychr@oregonstate.edu"
     }
 ]

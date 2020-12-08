@@ -26,7 +26,9 @@ function register_get_request(name)
 
 register_get_request("style.css");
 register_get_request("godotStyle.css");
+
 register_get_request("public/devs/zack.jpeg");
+register_get_request("public/devs/brady.jpeg");
 
 app.get('/scores', function (req, res, next) {
     var leaderboard_data = require('./public/data/leaderboard.json');
