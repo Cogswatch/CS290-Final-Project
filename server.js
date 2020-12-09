@@ -41,16 +41,16 @@ app.get('/scores/u/:username', function (req, res, next) {
         return item.name == req.params.username;
     })
 
-    leaderboard_data.sort((a, b) => (a.score < b.score) ? 1 : -1)
+    userboard_data.sort((a, b) => (a.score < b.score) ? 1 : -1)
 
     var i = 1;
-    leaderboard_data.forEach(function(ele){
+    userboard_data.forEach(function(ele){
         ele.index = i++;
     });
 
     var context = {
         title: req.params.username + `'s Scores`,
-        scores: leaderboard_data,
+        scores: userboard_data,
         linkUsers: false
     };
     res.render('scores', context);
