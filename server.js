@@ -24,16 +24,16 @@ function register_get_request(name)
     });
 }
 
-register_get_request("style.css");
-register_get_request("godotStyle.css");
+// register_get_request("style.css");
+// register_get_request("godotStyle.css");
 
-register_get_request("public/devs/zack.jpeg");
-register_get_request("public/devs/brady.jpeg");
-register_get_request("public/devs/cameron.jpeg");
+// register_get_request("public/devs/zack.jpeg");
+// register_get_request("public/devs/brady.jpeg");
+// register_get_request("public/devs/cameron.jpeg");
 
-register_get_request("public/screenshots/bang.jpeg");
-register_get_request("public/screenshots/blam.jpeg");
-register_get_request("public/screenshots/zoom.jpeg");
+// register_get_request("public/screenshots/bang.jpeg");
+// register_get_request("public/screenshots/blam.jpeg");
+// register_get_request("public/screenshots/zoom.jpeg");
 
 
 app.get('/scores', function (req, res, next) {
@@ -47,6 +47,27 @@ app.get('/scores', function (req, res, next) {
 
     var context = {
         title: 'Scores',
+        scores: leaderboard_data
+    };
+    res.render('scores', context);
+});
+
+app.get('/scores/u/:username', function (req, res, next) {
+    var leaderboard_data = require('./public/data/leaderboard.json');
+
+    var userboard_data = leaderboard_data.filter(function(item) {
+        return item.name == req.params.username;
+    })
+
+    leaderboard_data.sort((a, b) => (a.score < b.score) ? 1 : -1)
+
+    var i = 1;
+    leaderboard_data.forEach(function(ele){
+        ele.index = i++;
+    });
+
+    var context = {
+        title: req.params.username + `'s Scores`,
         scores: leaderboard_data
     };
     res.render('scores', context);
