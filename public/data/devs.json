@@ -7,7 +7,8 @@
     {
         "name": "evil Zack",
         "image_path": "devs/zack.jpeg",
-        "email": "masonblz@oregonstate.edu"
+        "email": "masonblz@oregonstate.edu",
+        "evil": true
     },
     {
         "name": "C Greyston Brady",
