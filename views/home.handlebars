@@ -1,1 +1,12 @@
-<p>Homepage</p>
+<div class="wrapper">
+    <nav class="gallery-nav">
+        {{#each gallery}}
+            {{> galleryNav}}
+        {{/each}}
+    </nav>
+    <div class="gallery">
+        {{#each gallery}}
+            {{> galleryPics}}
+        {{/each}}
+    </div>
+</div>

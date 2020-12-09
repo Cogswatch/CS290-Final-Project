@@ -187,3 +187,49 @@ body {
   width: auto;
   height: 100%;
 }
+
+img{
+    display:block;
+    max-width:100%;
+}
+
+.wrapper{
+    display:grid;
+    grid-template-columns: 1fr 5fr;
+    grid-gap: 20px;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.gallery{
+    overflow: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+.gallery-nav{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.gallery-nav a{
+    height: 200px;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.nav-img {
+    object-fit: cover;
+    transition: 0.25s ease all;
+}
+
+.nav-img:hover{
+    transform: scale(1.025);
+}
+
+.gallery-img{
+    scroll-snap-align: start;
+    margin-bottom: 10px;
+    min-height: 100vh;
+    object-fit: cover;
+}

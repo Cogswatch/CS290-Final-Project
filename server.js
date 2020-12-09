@@ -31,6 +31,11 @@ register_get_request("public/devs/zack.jpeg");
 register_get_request("public/devs/brady.jpeg");
 register_get_request("public/devs/cameron.jpeg");
 
+register_get_request("public/screenshots/bang.jpeg");
+register_get_request("public/screenshots/blam.jpeg");
+register_get_request("public/screenshots/zoom.jpeg");
+
+
 app.get('/scores', function (req, res, next) {
     var leaderboard_data = require('./public/data/leaderboard.json');
     leaderboard_data.sort((a, b) => (a.score < b.score) ? 1 : -1)
@@ -58,6 +63,7 @@ app.get('/about', function (req, res, next) {
 let homepage = function (req, res, next) {
     var context = {
         title: 'Home Page',
+        gallery: require("./public/data/gallery.json")
     };
     res.render('home', context);
 }
