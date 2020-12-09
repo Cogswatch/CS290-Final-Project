@@ -18,5 +18,11 @@
         "name": "Cameron Vandenberg",
         "image_path": "devs/cameron.jpeg",
         "email": "vandenca@oregonstate.edu"
+    },
+    {
+        "name":"Timothy Nguyen",
+        "image_path":"devs/IMG_2111.JPG",
+        "email":"nguyeti4@oregonstate.edu"
+
     }
 ]
