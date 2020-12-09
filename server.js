@@ -17,21 +17,6 @@ const fs = require('fs');
 
 app.use(express.static('public'));
 
-function register_get_request(name)
-{
-    app.get('/' + name, function (req, res) {
-        res.sendFile(path.join(__dirname, '', name));
-    });
-}
-
-// register_get_request("style.css");
-// register_get_request("godotStyle.css");
-
-// register_get_request("public/screenshots/bang.jpeg");
-// register_get_request("public/screenshots/blam.jpeg");
-// register_get_request("public/screenshots/zoom.jpeg");
-
-
 app.get('/scores', function (req, res, next) {
     var leaderboard_data = require('./public/data/leaderboard.json');
     leaderboard_data.sort((a, b) => (a.score < b.score) ? 1 : -1)

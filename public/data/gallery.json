@@ -1,14 +1,14 @@
 [
   {
     "image-name": "Blam",
-    "image-path": "public/screenshots/blam.jpeg"
+    "image-path": "screenshots/blam.jpeg"
   },
   {
     "image-name": "Bang",
-    "image-path": "public/screenshots/bang.jpeg"
+    "image-path": "screenshots/bang.jpeg"
   },
   {
     "image-name": "Zoom",
-    "image-path": "public/screenshots/zoom.jpeg"
+    "image-path": "screenshots/zoom.jpeg"
   }
 ]
