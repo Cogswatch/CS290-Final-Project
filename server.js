@@ -27,10 +27,6 @@ function register_get_request(name)
 // register_get_request("style.css");
 // register_get_request("godotStyle.css");
 
-// register_get_request("public/devs/zack.jpeg");
-// register_get_request("public/devs/brady.jpeg");
-// register_get_request("public/devs/cameron.jpeg");
-
 // register_get_request("public/screenshots/bang.jpeg");
 // register_get_request("public/screenshots/blam.jpeg");
 // register_get_request("public/screenshots/zoom.jpeg");

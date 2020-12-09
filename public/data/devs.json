@@ -1,22 +1,22 @@
 [
     {
         "name": "Zackery Mason-Blaug",
-        "image_path": "public/devs/zack.jpeg",
+        "image_path": "devs/zack.jpeg",
         "email": "masonblz@oregonstate.edu"
     },
     {
         "name": "evil Zack",
-        "image_path": "public/devs/zack.jpeg",
+        "image_path": "devs/zack.jpeg",
         "email": "masonblz@oregonstate.edu"
     },
     {
         "name": "C Greyston Brady",
-        "image_path": "public/devs/brady.jpeg",
+        "image_path": "devs/brady.jpeg",
         "email": "bradychr@oregonstate.edu"
     },
     {
         "name": "Cameron Vandenberg",
-        "image_path": "public/devs/cameron.jpeg",
+        "image_path": "devs/cameron.jpeg",
         "email": "vandenca@oregonstate.edu"
     }
 ]
