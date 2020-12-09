@@ -13,5 +13,10 @@
         "name": "C Greyston Brady",
         "image_path": "public/devs/brady.jpeg",
         "email": "bradychr@oregonstate.edu"
+    },
+    {
+        "name": "Cameron Vandenberg",
+        "image_path": "public/devs/cameron.jpeg",
+        "email": "vandenca@oregonstate.edu"
     }
 ]
