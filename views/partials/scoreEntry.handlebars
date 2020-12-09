@@ -3,7 +3,11 @@
         <p>{{index}}</p>
     </div>
     <div class="entry-name color-primary-1">
-        <p>{{name}}</p>
+        {{#if linkUsers}}
+            <a href="scores/u/{{name}}" style="text-decoration: none;" class="color-primary-1">{{name}}</a>
+        {{else}}
+            <p>{{name}}</p>
+        {{/if}}
     </div>
     <div class="entry-score color-primary-1">
         <p>{{score}}</p>

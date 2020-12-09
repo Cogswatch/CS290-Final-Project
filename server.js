@@ -28,7 +28,8 @@ app.get('/scores', function (req, res, next) {
 
     var context = {
         title: 'Scores',
-        scores: leaderboard_data
+        scores: leaderboard_data,
+        linkUsers: true
     };
     res.render('scores', context);
 });
@@ -49,7 +50,8 @@ app.get('/scores/u/:username', function (req, res, next) {
 
     var context = {
         title: req.params.username + `'s Scores`,
-        scores: leaderboard_data
+        scores: leaderboard_data,
+        linkUsers: false
     };
     res.render('scores', context);
 });
